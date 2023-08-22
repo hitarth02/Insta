@@ -55,7 +55,7 @@ const io = require("socket.io")(server,{
 });
 
 io.on("connection",(socket)=>{
-    // console.log("Connected to Socket.io");
+    console.log("Connected to Socket.io");
 
     socket.on("setup",(userData)=>{
         socket.join(userData._id);
@@ -64,7 +64,7 @@ io.on("connection",(socket)=>{
 
     socket.on("joinChat",(room)=>{
         socket.join(room);
-        // console.log("User joined room", room);
+        console.log("User joined room", room);
     });
 
     socket.on("typing",(room)=>{

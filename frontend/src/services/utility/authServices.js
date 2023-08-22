@@ -5,7 +5,7 @@ import { setToken, setUser } from "../../slices/userSlice";
 
 export async function signupToken(data , navigate){
     let result;
-
+    const toastId = toast.loading("Loading...");
     try {
         const response = await apiConnector("POST" , auth.SIGNUP_VERIFY_TOKEN , data );
         console.log(response);
@@ -20,7 +20,7 @@ export async function signupToken(data , navigate){
         console.log(error);
         toast.error("Error while SiginUp");
     };
-
+    toast.dismiss(toastId);
     return result;
 };
 

@@ -9,7 +9,7 @@ const Create = () => {
         Create Post
       </div>
       <PostUploader/>
-      <ReelUploader/>
+      {/* <ReelUploader/> */}
       <div className='h-[100px] w-full'></div>
     </div>
   )

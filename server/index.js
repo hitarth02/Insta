@@ -50,7 +50,7 @@ app.get("/",(req , res)=>{
 const io = require("socket.io")(server,{
     pingTimeout:60000,
     cors:{
-        origin:"*",
+        origin:"https://instagram-clone-webapp.vercel.app",
     },
 });
 

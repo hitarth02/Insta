@@ -211,14 +211,14 @@ const Navbar = () => {
           >
             <RiHome2Line className=" text-xl" />
           </NavLink>
-          <NavLink
+          {/* <NavLink
               to={"/reels"}
               className={`flex flex-row gap-x-3 items-center md:justify-center lg:justify-start ${
                 matchRoute("reels") && "text-blue-500 "
               }}`}
             >
               <BiSolidVideos className=" text-xl" />
-            </NavLink>
+            </NavLink> */}
           <NavLink
             to={"/upload"}
             className={`${matchRoute("upload") && "text-blue-500 "}}`}

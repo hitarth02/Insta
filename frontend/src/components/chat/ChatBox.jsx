@@ -13,7 +13,7 @@ import GroupLogoUpdate from "./GroupLogoUpdate";
 import ScrollableChat from "./ScrollableChat";
 import io from 'socket.io-client';
 
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "https://insta-backend-qxon.onrender.com";
 var socket , selectedChatCompare;
 
 const ChatBox = () => {

@@ -215,7 +215,7 @@ const ChatBox = () => {
     <div className="lg:flex flex-col w-screen h-[99vh] lg:w-[1000px] mx-auto px-2 lg:bg-zinc-950 lg:rounded-lg">
       {!groupChatProfile ? (
         <>
-          <div className="w-full border-b border-zinc-800 lg:hidden py-3 fixed top-0 ">
+          <div className="w-full border-b border-zinc-800 lg:hidden py-3 fixed top-0 bg-black">
             {selectedChat.isGroupChat === true ? (
               <div className="flex gap-x-3 items-center">
                 <BsArrowLeft
@@ -266,7 +266,7 @@ const ChatBox = () => {
               </div>
             )}
           </div>
-          <div className="hidden lg:flex w-[980px] py-3 border-b border-zinc-800 fixed top-0">
+          <div className="hidden lg:flex w-[980px] py-3 border-b border-zinc-800 fixed top-0 bg-black">
             {selectedChat.isGroupChat === true ? (
               <div className="flex gap-x-3 items-center">
                 <img src={`${selectedChat?.groupLogo}`} alt="user" onClick={() => setGroupChatProfile(true)} className=" w-12 h-12 rounded-full cursor-pointer" />
@@ -319,12 +319,12 @@ const ChatBox = () => {
 
 
 
-          <div className=" w-full h-[calc(100%-130px)] mt-20 flex flex-col justify-end overflow-y-hidden overflow-x-hidden scrollbar-hide">
+          <div className=" w-full h-[calc(100%-140px)] mt-20 flex flex-col justify-end overflow-y-hidden overflow-x-hidden scrollbar-hide">
             
             {
               chatLoading ? (<div className="w-full h-full flex justify-center items-center">
                 <Spinner size="lg"/>
-              </div>) : (<div className=" flex flex-col overflow-y-scroll scrollbar-hide ">
+              </div>) : (<div className=" flex flex-col overflow-y-hidden scrollbar-hide ">
                 <ScrollableChat allMessages={allMessages}/>
               </div>)
             }

@@ -20,7 +20,7 @@ const ScrollableChat = ({ allMessages }) => {
               <span
                 className={`  ${
                   m.sender._id !== user._id ? "bg-zinc-700" : "bg-blue-600"
-                } px-3 py-1 rounded-2xl my-1 max-w-[75%] ${m.sender._id === user._id ? '':''}`}
+                } px-3 py-2 rounded-3xl my-1 max-w-[75%] ${m.sender._id === user._id ? '':''}`}
 
                 style={{
                     marginLeft:isSameSenderMargin(allMessages , m , i , user._id),

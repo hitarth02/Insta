@@ -114,7 +114,8 @@ const ChatBox = () => {
     };
   };
 
-  const sendTheMessage = async () => {
+  const sendTheMessage = async (e) => {
+    e.preventDefault();
     try {
       socket.emit("stopTyping",selectedChat._id);
       setMessage("");
@@ -214,7 +215,7 @@ const ChatBox = () => {
     <div className="lg:flex flex-col w-screen h-[99vh] lg:w-[1000px] mx-auto px-2 lg:bg-zinc-950 lg:rounded-lg">
       {!groupChatProfile ? (
         <>
-          <div className="w-full border-b border-zinc-800 lg:hidden py-3 ">
+          <div className="w-full border-b border-zinc-800 lg:hidden py-3 fixed top-0 ">
             {selectedChat.isGroupChat === true ? (
               <div className="flex gap-x-3 items-center">
                 <BsArrowLeft
@@ -228,7 +229,7 @@ const ChatBox = () => {
                 >
                   <p className=" text-lg">{selectedChat.chatName}</p>
                   <p className="flex gap-x-1 text-sm">
-                    {selectedChat.users?.map((u) => {
+                    {selectedChat.users?.slice(0,2).map((u) => {
                       return (
                         <>
                           <span
@@ -236,7 +237,7 @@ const ChatBox = () => {
                               u.userName === user.userName ? "hidden" : ""
                             }`}
                           >
-                            {u.userName} ,
+                            {u.userName} {selectedChat.users.length >3 ? ", ...":""} ,
                           </span>
                         </>
                       );
@@ -265,7 +266,7 @@ const ChatBox = () => {
               </div>
             )}
           </div>
-          <div className="hidden lg:flex w-full py-3 border-b border-zinc-800">
+          <div className="hidden lg:flex w-[980px] py-3 border-b border-zinc-800 fixed top-0">
             {selectedChat.isGroupChat === true ? (
               <div className="flex gap-x-3 items-center">
                 <img src={`${selectedChat?.groupLogo}`} alt="user" onClick={() => setGroupChatProfile(true)} className=" w-12 h-12 rounded-full cursor-pointer" />
@@ -275,7 +276,7 @@ const ChatBox = () => {
                 >
                   <p className=" text-lg">{selectedChat.chatName}</p>
                   <p className="flex gap-x-1 text-sm">
-                    {selectedChat.users?.map((u) => {
+                    {selectedChat.users?.slice(0,5).map((u) => {
                       return (
                         <>
                           <span
@@ -283,7 +284,7 @@ const ChatBox = () => {
                               u.userName === user.userName ? "hidden" : ""
                             }`}
                           >
-                            {u.userName} ,
+                            {u.userName} {selectedChat.users.length >6 ? ', ...':''} ,
                           </span>
                         </>
                       );
@@ -318,7 +319,7 @@ const ChatBox = () => {
 
 
 
-          <div className=" w-full h-[calc(100%-140px)] flex flex-col justify-end overflow-y-hidden scrollbar-hide">
+          <div className=" w-full h-[calc(100%-130px)] mt-20 flex flex-col justify-end overflow-y-hidden overflow-x-hidden scrollbar-hide">
             
             {
               chatLoading ? (<div className="w-full h-full flex justify-center items-center">
@@ -347,7 +348,7 @@ const ChatBox = () => {
                 className="mb-2 lg:mb-0"
               />
             </div>
-            <div className="flex lg:hidden gap-x-2 fixed bottom-2 mt-1 bg-black w-[95%] pt-1">
+            <div className="flex lg:hidden gap-x-2 fixed bottom-0 mt-[2px] bg-black w-[97%] pt-[1px] z-40 rounded-t-3xl">
               <Input
 
                 size="md"

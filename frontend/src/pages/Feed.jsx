@@ -30,23 +30,23 @@ const Feed = () => {
 
   return (
     <div className="relative lg:ml-5 ">
-      <Navbar shouldHideOnScroll={true} isBordered={true} className=" inline-block md:hidden lg:hidden mb-5">
-      <NavbarBrand>
+      <nav className=" flex justify-between items-center md:hidden lg:hidden pt-2 mb-1 px-1 border-b border-zinc-800 pb-2 fixed top-0 bg-black z-50 w-[95vw]">
+      <div className="flex gapx-2 items-center">
         <img
           src={Insta}
-          className=" w-[35px]"
+          className=" w-[30px]"
         />
         <p className="pl-2">Instagram</p>
-      </NavbarBrand>
-      <NavbarContent justify="end">
-        <NavbarItem >
-          <Button onClick={()=>navigate('/messenger')} color="default" href="#" variant="flat">
+      </div>
+      <div >
+        <div >
+          <Button onClick={()=>navigate('/messenger')} color="default" href="#" variant="light" size="sm">
             <BiMessageSquareDots className=" text-2xl text-blue-500" />
           </Button>
-        </NavbarItem>
-      </NavbarContent>
-    </Navbar>
-      <div>
+        </div>
+      </div>
+    </nav>
+      <div className="mt-16 lg:mt-0">
         {loading ? (
           <div className="flex flex-col ">
             <Card className="max-w-[450px] space-y-5 p-4" radius="2xl">

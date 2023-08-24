@@ -45,7 +45,8 @@ const PostCard = ({ post, setAllPosts, allPosts }) => {
   const inputRef = useRef();
   const [postId, setPostId] = useState();
   const [textComment, setTextComment] = useState("");
-
+  const [isLikeLoading , setIsLikeLoading] = useState(false);
+  const [isUnLikeLoading , setIsUnLikeLoading] = useState(false);
   const time = post?.createdAt;
   const localDate = new Date(time);
   const agoTime = timeAgo(new Date(`${localDate}`));
@@ -57,6 +58,7 @@ const PostCard = ({ post, setAllPosts, allPosts }) => {
   } = useForm();
 
   const likePost = async (postId) => {
+    setIsLikeLoading(true);
     try {
       const res = await addLike({ postId: postId }, token, dispatch);
       console.log("res", res);
@@ -70,10 +72,12 @@ const PostCard = ({ post, setAllPosts, allPosts }) => {
       setAllPosts(newPosts);
     } catch (error) {
       console.log(error);
-    }
+    };
+    setIsLikeLoading(false);
   };
 
   const unLikePost = async (postId) => {
+    setIsUnLikeLoading(true);
     try {
       const res = await removeLike({ postId: postId }, token, dispatch);
       console.log("unres", res);
@@ -87,7 +91,8 @@ const PostCard = ({ post, setAllPosts, allPosts }) => {
       setAllPosts(newPosts);
     } catch (error) {
       console.log(error);
-    }
+    };
+    setIsUnLikeLoading(false);
   };
 
   const saveToCollection = async (postId) => {
@@ -184,13 +189,13 @@ const PostCard = ({ post, setAllPosts, allPosts }) => {
             <div className="flex gap-x-4 text-xl">
               {post.likes.includes(user._id) ? (
                 <FaHeart
-                  onClick={() => unLikePost(post._id)}
+                  onClick={() => isUnLikeLoading ? '' : unLikePost(post._id)}
                   className=" text-2xl text-red-500 cursor-pointer"
                 />
               ) : (
                 <FaRegHeart
                   className=" text-2xl cursor-pointer"
-                  onClick={() => likePost(post._id)}
+                  onClick={() => isLikeLoading ? (''):(likePost(post._id))}
                 />
               )}
               <FaRegComment

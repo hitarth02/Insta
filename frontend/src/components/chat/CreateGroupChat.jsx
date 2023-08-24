@@ -69,7 +69,7 @@ const CreateGroupChat = ({fetchAllChats}) => {
 
   return (
     <>
-      <Button onPress={onOpen} size="sm" variant="flat" color="primary">
+      <Button onPress={onOpen} size="sm" variant="flat" color="primary" >
         Create group
       </Button>
 

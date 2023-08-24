@@ -37,11 +37,11 @@ const MyChats = ({ setSearchBox }) => {
 
   return (
     <div
-      className={`lg:w-[400px] overflow-auto h-screen w-full lg:border-r border-zinc-800 px-5 ${
+      className={`lg:w-[400px] h-[99%] lg:h-full w-full lg:border-r border-zinc-800 px-5 ${
         selectedChat ? "hidden" : "inline-block"
       } ${selectedChat ? "lg:inline-block" : "lg:inline-block"}`}
     >
-      <div className="flex items-center justify-between py-4 border-b border-zinc-800">
+      <div className="flex items-center justify-between py-4 border-b border-zinc-800 bg-black">
         <div className="flex gap-x-2 items-center">
           <BsArrowLeft
             className=" text-xl cursor-pointer"
@@ -63,12 +63,12 @@ const MyChats = ({ setSearchBox }) => {
       <div>
         <div className=" text-xl text-zinc-300 mb-4 mt-3 flex justify-between ">
           <p>Messages</p>
-          <CreateGroupChat fetchAllChats={fetchAllChats} />
+          <CreateGroupChat fetchAllChats={fetchAllChats}/>
         </div>
         {loading ? (
           <Spinner className="flex justify-center mt-5" size="lg" />
         ) : (
-          <div className="flex flex-col gap-y-3">
+          <div className="flex flex-col gap-y-3 overflow-x-hidden h-[86vh] overflow-y-scroll scrollbar-hide">
             {chats.length === 0 && (
               <p className=" text-center text-zinc-400 mt-5">
                 Search a user and start a chat.

@@ -211,10 +211,10 @@ const ChatBox = () => {
   };
 
   return (
-    <div className="lg:flex flex-col w-screen h-screen lg:w-[1000px] mx-auto px-2 lg:bg-zinc-950 lg:rounded-lg">
+    <div className="lg:flex flex-col w-screen h-[99vh] lg:w-[1000px] mx-auto px-2 lg:bg-zinc-950 lg:rounded-lg">
       {!groupChatProfile ? (
         <>
-          <div className="w-full border-b border-zinc-800 lg:hidden py-3">
+          <div className="w-full border-b border-zinc-800 lg:hidden py-3 ">
             {selectedChat.isGroupChat === true ? (
               <div className="flex gap-x-3 items-center">
                 <BsArrowLeft
@@ -318,7 +318,7 @@ const ChatBox = () => {
 
 
 
-          <div className=" w-full h-[calc(100%-130px)] flex flex-col justify-end overflow-y-hidden scrollbar-hide">
+          <div className=" w-full h-[calc(100%-140px)] flex flex-col justify-end overflow-y-hidden scrollbar-hide">
             
             {
               chatLoading ? (<div className="w-full h-full flex justify-center items-center">
@@ -331,20 +331,37 @@ const ChatBox = () => {
 
           <div className="w-full mx-auto mt-3 mb-2">
             {isTyping ? isSameUser() :<></>}
-            <Input
-              endContent={
-                <Button size="md" variant="light" color="primary" onClick={sendTheMessage}>
-                  Send
-                </Button>
-              }
-              size="md"
-              radius="full"
-              onKeyDown={handleKeyDown}
-              onChange={handleTyping}
-              value={message}
-              placeholder="Type a message..."
-              className="mb-2 lg:mb-0"
-            />
+            <div className="lg:flex hidden">
+              <Input
+                endContent={
+                  <Button isDisabled={message ? false : true} size="md" variant="light" color="primary" onClick={sendTheMessage}>
+                    Send
+                  </Button>
+                }
+                size="md"
+                radius="full"
+                onKeyDown={handleKeyDown}
+                onChange={handleTyping}
+                value={message}
+                placeholder="Type a message..."
+                className="mb-2 lg:mb-0"
+              />
+            </div>
+            <div className="flex lg:hidden gap-x-2 fixed bottom-2 mt-1 bg-black w-[95%] pt-1">
+              <Input
+
+                size="md"
+                radius="full"
+                onKeyDown={handleKeyDown}
+                onChange={handleTyping}
+                value={message}
+                placeholder="Type a message..."
+                className="mb-2 lg:mb-0"
+              />
+              <Button isDisabled={message ? false : true} radius="full" size="md" color="primary" onTouchStart={sendTheMessage}>
+                Send
+              </Button>
+            </div>
           </div>
         </>
       ) : (

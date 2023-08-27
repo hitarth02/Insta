@@ -5,7 +5,7 @@ import { FiSearch } from "react-icons/fi";
 import { NavLink, matchPath, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { VscMenu } from "react-icons/vsc";
-import { AiOutlineSetting, AiOutlineCompass } from "react-icons/ai";
+import { AiOutlineSetting, AiOutlineCompass , AiOutlineHeart} from "react-icons/ai";
 import { IoCreateOutline } from "react-icons/io5";
 import { BiLogOut , BiSolidVideos } from "react-icons/bi";
 import {
@@ -38,6 +38,7 @@ const Navbar = () => {
   const matchRoute = (route) => {
     return matchPath({ path: route }, location.pathname);
   };
+  const [redDot , setRedDot] = useState(true);
 
   const logoutUser = () => {
     try {
@@ -113,16 +114,17 @@ const Navbar = () => {
               {/* <FiPlusSquare className=" text-xl" /> */}
               <p className=" hidden lg:block text-xl">Create</p>
             </NavLink>
-            <NavLink
+            {/* <NavLink
               to={"/reels"}
               className={`flex flex-row gap-x-3 items-center md:justify-center lg:justify-start ${
                 matchRoute("reels") && "text-blue-500 "
               }}`}
             >
               <BiSolidVideos className=" text-xl" />
-              {/* <FiPlusSquare className=" text-xl" /> */}
+              
               <p className=" hidden lg:block text-xl">Reels</p>
             </NavLink>
+             */}
             <NavLink
               to={"/search"}
               className={`flex flex-row gap-x-3 items-center md:justify-center lg:justify-start ${
@@ -133,11 +135,13 @@ const Navbar = () => {
               <p className=" hidden lg:block text-xl">Search</p>
             </NavLink>
             <NavLink
-              to={"/suggestions"}
+              to={"/activity"}
               className={`flex flex-row gap-x-3 items-center md:justify-center lg:justify-start ${
-                matchRoute("suggestions") && "text-blue-500 "
+                matchRoute("activity") && "text-blue-500 "
               }}`}
+              onClick={()=>setRedDot(false)}
             >
+              <p className={`w-[10px] h-[10px] rounded-full bg-red-600 absolute -mt-3 ${redDot ? '':'hidden'}`} ></p>
               <AiOutlineCompass className=" text-xl" />
               <p className=" hidden lg:block text-xl">Activity</p>
             </NavLink>
@@ -210,6 +214,14 @@ const Navbar = () => {
             className={` ${matchRoute("/") && "text-blue-500"}`}
           >
             <RiHome2Line className=" text-xl" />
+          </NavLink>
+          <NavLink
+            to={"/activity"}
+            className={` ${matchRoute("activity") && "text-blue-500"}`}
+            onClick={()=>setRedDot(false)}
+          >
+            <p className={`w-2 h-2 rounded-full bg-red-600 absolute ${redDot ? '':'hidden'}`} ></p>
+            <AiOutlineHeart className=" text-2xl" />
           </NavLink>
           {/* <NavLink
               to={"/reels"}

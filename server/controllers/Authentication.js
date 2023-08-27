@@ -182,14 +182,14 @@ exports.login = async (req , res) => {
                 email:user.email,
             };
             const token = jwt.sign(payload , process.env.JWT_SECRET , {
-                expiresIn:"2d",
+                expiresIn:"20d",
             });
 
             user = user.toObject();
             user.token = token;
-
+    
             return res.cookie("Token" , token , {
-                expires: new Date(Date.now() + 5*24*60*60*1000),
+                expires: new Date(Date.now() + 7*24*60*60*1000),
                 httpOnly:true,
             }).status(200).json({
                 success:true,

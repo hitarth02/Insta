@@ -8,7 +8,8 @@ const {
     updateUserPicture,
     getAllUsers,
     followUser,
-    unFollowUser
+    unFollowUser,
+    fetchNotifications
 } = require("../controllers/user");
 
 const {
@@ -22,5 +23,6 @@ router.put("/updateUserDetails",auth,updateUserDetails);
 router.put("/updateUserPicture",auth,updateUserPicture);
 router.post("/followUser",auth,followUser);
 router.post("/unFollowUser",auth,unFollowUser);
+router.get("/fetchNotifications",auth,fetchNotifications);
 
 module.exports = router;

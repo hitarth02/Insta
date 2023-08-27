@@ -111,7 +111,7 @@ const Upload = ({
           <>
             <div
               {...getRootProps()}
-              className=" w-full flex-col text-center items-center p-6 hidden lg:flex"
+              className=" w-full flex-col aspect-square text-center content-center items-center p-6 hidden lg:flex pt-10"
             >
               <input {...getInputProps()} ref={inputRef} />
               <div className=" text-3xl mb-5 text-yellow-50">
@@ -123,12 +123,12 @@ const Upload = ({
                 <br /> a file
               </p>
               <ul className="flex list-disc text-xs gap-x-12 mt-10 font-semibold text-richblack-400">
-                <li>Aspect ratio 16:9</li>
-                <li>Recommended size 1024x576 </li>
+                <li>Aspect ratio 1:1 or 4:3</li>
+                <li>Recommended size 1280X720 </li>
               </ul>
             </div>
             <div
-              className="flex w-full flex-col text-center items-center p-6 lg:hidden"
+              className="flex w-full flex-col text-center items-center p-6 lg:hidden aspect-square pt-10"
             >
               <div className=" text-3xl mb-5 text-yellow-50">
                 <AiOutlineCloudUpload />

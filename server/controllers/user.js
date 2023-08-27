@@ -1,3 +1,4 @@
+const Notifications = require("../models/notification");
 const User = require("../models/user");
 const uploadToCloudinary = require("../utils/fileUploader");
 require("dotenv").config();
@@ -425,6 +426,49 @@ exports.searchUser = async (req , res) => {
         return res.status(500).json({
             success:false,
             message:"cannot search users!"
+        }); 
+    };
+};
+
+//FETCH NOTIFICATIONS
+
+exports.fetchNotifications = async (req , res) => {
+    try {
+        const {id} = req.user;
+
+        const allNotifications = await Notifications.find({
+            user:{ $eq: id}
+        }).sort({createdAt:-1}).populate("currUser").populate("user").populate({
+            path:"post",
+            populate:{
+                path:"comments",
+                populate:{
+                    path:"user"
+                }
+            }
+        }).populate({
+            path:"post",
+            populate:{
+                path:"user",
+            }
+        }).exec();
+        if(!allNotifications){
+            return res.json({
+                success:false,
+                message:"problem fetching notification for user"
+            });
+        };
+
+        return res.status(200).json({
+            success:true,
+            message:"fetch notfications",
+            data:allNotifications
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:"cannot fetch notifications !"
         }); 
     };
 };

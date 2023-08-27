@@ -1,6 +1,7 @@
 import React from 'react';
 import PostUploader from '../components/home/posts/PostUploader';
 import ReelUploader from '../components/home/posts/ReelUploader';
+import CropAndUpload from '../components/common/CropAndUpload';
 
 const Create = () => {
   return (
@@ -9,6 +10,7 @@ const Create = () => {
         Create Post
       </div>
       <PostUploader/>
+      {/* <CropAndUpload/> */}
       {/* <ReelUploader/> */}
       <div className='h-[100px] w-full'></div>
     </div>

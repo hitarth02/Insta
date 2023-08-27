@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const notificationSchema = new mongoose.Schema({
+    currUser:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    },
     user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"User"
@@ -12,6 +16,12 @@ const notificationSchema = new mongoose.Schema({
     post:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Post"
+    },
+    isLike:{
+        type:Boolean
+    },
+    isPost:{
+        type:Boolean
     },
     createdAt:{
         type:Date,

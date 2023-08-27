@@ -8,4 +8,5 @@ export const userApi = {
     FOLLOW_USER_API: BASE_URL + '/user/followUser',
     UNFOLLOW_USER_API: BASE_URL + '/user/unFollowUser',
     SEARCH_USER_API: BASE_URL + '/user/searchUser',
+    NOTIFICATIONS_API: BASE_URL + '/user/fetchNotifications',
 };

@@ -67,7 +67,7 @@ const ProfilePosts = ({ userDetails, setUserDetails }) => {
                 </div>
               }
             />
-            <Tab
+            {/* <Tab
               key="Reel"
               title={
                 <div
@@ -82,7 +82,7 @@ const ProfilePosts = ({ userDetails, setUserDetails }) => {
                   <span>Reels</span>
                 </div>
               }
-            />
+            /> */}
             <Tab
               key="Saved"
               title={

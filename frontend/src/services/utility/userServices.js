@@ -131,3 +131,19 @@ export async function searchUser(data , token){
     };
     return result;
 };
+
+export async function notificationApi(token){
+    let result=[];
+    try {
+        const response = await apiConnector("GET" , userApi.NOTIFICATIONS_API , {} , { Authorization: `Bearer ${token}`});
+        console.log("API RES>>>>",response);
+        if(!response.data.success){
+            toast.error(response.data.message);
+            throw new Error (response.data.message);
+        };
+        result = response.data.data;
+    } catch (error) {
+        console.log(error);
+    };
+    return result;
+};

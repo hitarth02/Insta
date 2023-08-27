@@ -4,8 +4,6 @@ const uploadToCloudinary = async (file , folder , height , width , quality ) => 
     const options = {
         folder,
         timeout:120000,
-        maxVideoFileSize:15,
-
     };
     if(height){
         options.height = height;

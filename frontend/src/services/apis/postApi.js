@@ -1,9 +1,10 @@
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
+
 export const postApi = {
     CREATE_POST_API: BASE_URL + '/post/createPost',
     GET_SINGLE_POST_API: BASE_URL + '/post/getSinglePost',
-    GET_ALL_POSTS_API: BASE_URL + '/post/getAllPosts',
+    GET_ALL_POSTS_API: BASE_URL + `/post/getAllPosts`,
     LIKE_POST_API: BASE_URL + '/post/likePost',
     UNLIKE_POST_API: BASE_URL + '/post/unLikePost',
     SAVE_POST_API: BASE_URL + '/post/savePost',

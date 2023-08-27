@@ -4,10 +4,11 @@ import { getAllPosts } from "../services/utility/postServices";
 import { Button, Card, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, Skeleton } from "@nextui-org/react";
 import PostCard from "../components/home/posts/PostCard";
 import Insta from '../assets/insta.png';
-import {BiMessageSquareDots} from 'react-icons/bi';
+import {AiOutlineComment} from 'react-icons/ai';
 import { useNavigate } from "react-router-dom";
 
 const Feed = () => {
+
   const [allPosts, setAllPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ const Feed = () => {
     fetchAllPosts();
   }, []);
 
+
   return (
     <div className="relative lg:ml-5 ">
       <nav className=" flex justify-between items-center md:hidden lg:hidden pt-2 mb-1 px-1 border-b border-zinc-800 pb-2 fixed top-0 bg-black z-50 w-[95vw]">
@@ -40,15 +42,15 @@ const Feed = () => {
       </div>
       <div >
         <div >
-          <Button onClick={()=>navigate('/messenger')} color="default" href="#" variant="light" size="sm">
-            <BiMessageSquareDots className=" text-2xl text-blue-500" />
+          <Button onClick={()=>navigate('/messenger')} color="default" href="#" variant="light" size="sm" className="-mr-3">
+            <AiOutlineComment className=" text-2xl text-blue-500" />
           </Button>
         </div>
       </div>
     </nav>
-      <div className="mt-16 lg:mt-0">
+      <div className="mt-16 lg:mt-0 " id="mainFeed">
         {loading ? (
-          <div className="flex flex-col ">
+          <div className="flex flex-col gap-y-3">
             <Card className="max-w-[450px] space-y-5 p-4" radius="2xl">
               <Skeleton className="rounded-lg">
                 <div className="h-24 rounded-lg bg-default-300"></div>

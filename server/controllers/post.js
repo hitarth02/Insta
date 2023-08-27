@@ -8,12 +8,14 @@ require("dotenv").config();
 
 exports.getAllPosts = async (req , res) => {
     try {
-        const allPosts = (await Post.find().populate("user").populate({
+        const limit = req.query.limit;
+        const skip = req.query.skip;
+        const allPosts = await Post.find().sort({createdAt:-1}).populate("user").populate({
             path:"comments",
             populate:{
                 path:"user"
             }
-        }).exec()).reverse();
+        }).limit(limit).skip(skip).exec();
         
         return res.status(200).json({
             success:true,
@@ -72,8 +74,9 @@ exports.createPost = async (req , res) => {
         const uploadPost = await uploadToCloudinary(
             post,
             process.env.FOLDER_NAME,
-            1270,
-            1270
+            '',
+            '',
+            100
         );
         if(!uploadPost){
             return res.json({
@@ -103,6 +106,17 @@ exports.createPost = async (req , res) => {
                 message:"Cannot update user!"
             });
         };
+
+        updateUser.followers.forEach(async(u)=>{
+            const newNoti = await Notification.create({
+                currUser:id,
+                user:u,
+                post:newPost._id,
+                notification: `${updateUser.userName} posted in a while. Tap to see.`,
+                isPost:true,
+            });
+            return newNoti;
+        });
 
         return res.status(200).json({
             success:true,
@@ -150,19 +164,12 @@ exports.likePost = async (req , res) => {
 
         const notification = await Notification.create({
             user: likePost.user._id,
-            notification: `${user.userName} liked your post`,
-            post:likePost._id
+            notification: `${user.userName} liked your post.`,
+            post:likePost._id,
+            isLike:true,
+            currUser:id,
+            isPost:false
         });
-
-        const currUser = await User.findByIdAndUpdate(
-            {_id:likePost.user._id},
-            {
-                $push:{
-                    notification:notification._id
-                }
-            }
-        );
-
 
         const updateUser = await User.findByIdAndUpdate(
             {_id:id},
@@ -360,6 +367,8 @@ exports.addComment = async(req , res) => {
             });
         };
 
+        const user = await User.findById(id);
+
         const newComment = await Comment.create({
             user:id,
             post:postId,
@@ -380,6 +389,15 @@ exports.addComment = async(req , res) => {
                 path:"user"
             }
         }).exec();
+
+        const newNotification = await Notification.create({
+            currUser:id,
+            user:updatePost.user._id,
+            notification:`${user.userName} Commented on your post.`,
+            post:updatePost._id,
+            isLike:false,
+            isPost:false
+        });
 
         const updateUser = await User.findByIdAndUpdate(
             {_id:id},

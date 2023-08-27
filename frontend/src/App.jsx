@@ -36,7 +36,7 @@ function App() {
           <Route path='/upload' element={<Create/>}/>
           {/* <Route path='/reels' element={<Reels/>}/> */}
           <Route path='/search' element={<Search/>}/>
-          <Route path='/suggestions' element={<Suggestions/>}/>
+          <Route path='/activity' element={<Suggestions/>}/>
           <Route path='/settings' element={<Settings/>}/>
           <Route path='/profile/:usermail' element={<UserProfile/>}/>
         </Route>

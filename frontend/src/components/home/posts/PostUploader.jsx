@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Upload from '../../common/Upload';
 import {useForm} from 'react-hook-form';
 import { Button, Input } from '@nextui-org/react';
 import { createPost } from '../../../services/utility/postServices';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-hot-toast';
 
 const PostUploader = () => {
     
@@ -15,18 +16,20 @@ const PostUploader = () => {
         handleSubmit,
         formState:{errors}
     } = useForm();
-
+    const [loading , setLoading] = useState(false);
     const {token} = useSelector((state)=>state.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const uploadPost = async (data) => {
+        setLoading(true);
         try {
             const res = await createPost({post: data.post , caption: data.caption},token , dispatch , navigate);
             console.log(res);
         } catch (error) {
             console.log(error)
         };
+        setLoading(false);
     };
 
   return (
@@ -58,6 +61,7 @@ const PostUploader = () => {
                 size='lg'
                 className='mt-5'
                 type='submit'
+                isDisabled={loading ? true : false}
             >
                 Create Post
             </Button>
